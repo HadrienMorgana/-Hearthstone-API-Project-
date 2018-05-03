@@ -10,8 +10,8 @@ const adresse = 'https://api.hearthstonejson.com/v1/18336/frFR/cards.json'
 
 program
     .version('1.0.0')
-    .option('-o, --obtensible','Ne montre que les cartes obtensibles')
-    .option('-O, --nonObtensible','Ne montre pas les cartes obtensibles')
+    .option('-o, --obtenable','Ne montre que les cartes obtensibles')
+    .option('-O, --nonObtenable','Ne montre pas les cartes obtensibles')
     .option('-c, --class [class]', 'Affiche les cartes de la classe')
     //Erreur nom
     //.option('-n, --name [name]', 'Affiche les cartes qui ont le nom donné')
@@ -29,9 +29,8 @@ program
 program.parse(process.argv)
 
 
-
-let VarTri
-
+let Deck = []
+let CompleteDeck = []
 let Collectible = ['false', 'true']
 let Names = []
 let Ids = []
@@ -43,22 +42,33 @@ let Rarity = []
 let Type = []
 
 let AllCardsDatas = {}
-
 let AllCards = []
+
+let VarTri
 let SortCards = []
 let SortCards2 =[]
+
 let ActualsCards = []
 
 const ObjectTransiTabs = {collectible: Collectible, name: Names, cardClass: Classes, id: Ids, set: Extensions, cost: Costs, rarity: Rarity, type: Type, artist: Artist}
 const TabValCard = ['collectible','name','cardClass','id','set','cost','rarity','type','artist']
 
-
-
-let QuestionCard = {type: 'list', name: 'WhatAllCards', message: 'Que voulez vous savoir sur la carte ?', choices: TabValCard}
+let QuestionCard = {type: 'list', name: 'WhatAllCards', choices: TabValCard}
 let QuestionCardPrecise = {type : 'list', name: 'WhatSpeVal', message: 'Précisez la requete'}
 
 
 
+const getCardById = (id) => {
+	for (var i = AllCards.length - 1; i >= 0; i--) {
+		if (AllCards[i].id == id) {
+			CompleteDeck.push(AllCards[i])
+		}
+	}
+}
+
+const defQuestion = (x) => {
+	QuestionCard.message = x
+}
 
 const EraseFile = async () => {
 	fs.unlink('Deck.json', function (err) {
@@ -114,16 +124,10 @@ const main = async () => {
 		AllCardsDatas = await getAllCards()
 		AllCards = AllCardsDatas.data
 		ActualsCards = AllCards
-
 		console.log(await defTab())
 
-		
 
-
-		
-
-
-		if (program.obtensible) {
+		if (program.obtenable) {
 			for (let i = ActualsCards.length - 1; i >= 0; i--) {
 				if (ActualsCards[i].collectible == true) {
 					SortCards.push(ActualsCards[i])
@@ -134,7 +138,7 @@ const main = async () => {
 		}
 
 
-		if (program.nonObtensible) {
+		if (program.nonObtenable) {
 			for (let i = ActualsCards.length - 1; i >= 0; i--) {
 				if (ActualsCards[i].collectible == true) {
 					SortCards.push(ActualsCards[i])
@@ -234,6 +238,7 @@ const main = async () => {
 
 
 		if (program.select){
+			defQuestion('Que voulez vous savoir sur la carte ?')
 			inquirer.prompt(QuestionCard)
 			.then(answers => {
 				VarTri = answers.WhatAllCards
@@ -254,6 +259,7 @@ const main = async () => {
 
 
 		if (program.write){
+			defQuestion('Quel(es) carte(s) voulez-vous enregistrer ?')
 			inquirer.prompt(QuestionCard)
 			.then(answers => {
 				VarTri = answers.WhatAllCards
@@ -282,7 +288,12 @@ const main = async () => {
 		if (program.deck) {
 			fs.readFile('Deck.json', 'utf-8', (err, data) => {
 				if (err) throw err
-				console.log(data)
+				Deck = data.split("\n")
+				Deck.pop()
+				for (var i = Deck.length - 1; i >= 0; i--) {
+					getCardById(Deck[i])
+				}
+				console.log(CompleteDeck)
 			})
 		}
 
@@ -290,18 +301,6 @@ const main = async () => {
 		if (program.erase) {
 			console.log(await EraseFile())
 		}
-
-
-
-
-
-
-		
-
-
-
-
-
 
 		/*
 		problème de lecture de var artist. espace et majs
@@ -336,19 +335,6 @@ const main = async () => {
 			ActualsCards = SortCards
 			// console.log(ActualsCards[20].name.toLowerCase().replace(/ /g, ""))
 		}*/
-
-
-
-		
-
-		
-
-		
-
-
-
-
-
 	}	
 	catch (e) {
 		console.error(e)
