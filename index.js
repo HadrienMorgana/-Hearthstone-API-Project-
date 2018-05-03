@@ -2,6 +2,7 @@
 const request = require('axios')
 const program = require('commander')
 const inquirer = require('inquirer')
+const fs = require('fs')
 
 const adresse = 'https://api.hearthstonejson.com/v1/18336/frFR/cards.json'
 
@@ -20,7 +21,10 @@ program
     //.option('-a, --artist [name]', 'Affiche les cartes selon l artiste')
     .option('-r, --rarity [rarity]', 'Affiche les cartes par rareté')
     .option('-t, --type [type]', 'Affiche les cartes par type')
-    .option('-i, --inquirer','Tests d inquirer')
+    .option('-s, --select','Selection avec menu')
+    .option('-w, --write', 'Ajoute des cartes dans le deck')
+    .option('-d, --deck','Affiche les cartes du deck')
+    .option('-E, --erase','Détruit le deck')
 
 program.parse(process.argv)
 
@@ -56,7 +60,12 @@ let QuestionCardPrecise = {type : 'list', name: 'WhatSpeVal', message: 'Précise
 
 
 
-
+const EraseFile = async () => {
+	fs.unlink('Deck.json', function (err) {
+		if (err) throw err
+	})
+	return 'Fichier effacé'
+}
 
 const defPreciseQuestion = (x) => {
 	QuestionCardPrecise.choices = x
@@ -121,6 +130,7 @@ const main = async () => {
 				}
 			}
 			ActualsCards = SortCards
+			console.log(ActualsCards)
 		}
 
 
@@ -136,6 +146,7 @@ const main = async () => {
 				}
 			}
 			ActualsCards = SortCards2
+			console.log(ActualsCards)
 		}
 
 
@@ -147,6 +158,7 @@ const main = async () => {
 					}
 				}
 				ActualsCards = SortCards
+				console.log(ActualsCards)
 			} else {
 				console.log("La classe demandée n'existe pas. Les classes sont : ")
 				for (var i = Classes.length - 1; i >= 0; i--) {
@@ -164,6 +176,7 @@ const main = async () => {
 					}
 				}
 				ActualsCards = SortCards
+				console.log(ActualsCards)
 			} else {
 				console.log("L'extension demandée n'existe pas. Les extensions sont : ")
 				for (var i = Extensions.length - 1; i >= 0; i--) {
@@ -180,6 +193,7 @@ const main = async () => {
 				}
 			}
 			ActualsCards = SortCards
+			console.log(ActualsCards)
 		}
 
 
@@ -191,6 +205,7 @@ const main = async () => {
 					}
 				}
 				ActualsCards = SortCards
+				console.log(ActualsCards)
 			} else {
 				console.log("La rareté demandée n'existe pas. Les raretés sont : ")
 				for (var i = Rarity.length - 1; i >= 0; i--) {
@@ -208,6 +223,7 @@ const main = async () => {
 					}
 				}
 				ActualsCards = SortCards
+				console.log(ActualsCards)
 			} else {
 				console.log("Le type de carte demandé n'existe pas. Les types de cartes sont : ")
 				for (var i = Type.length - 1; i >= 0; i--) {
@@ -217,7 +233,7 @@ const main = async () => {
 		}
 
 
-		if (program.inquirer){
+		if (program.select){
 			inquirer.prompt(QuestionCard)
 			.then(answers => {
 				VarTri = answers.WhatAllCards
@@ -234,6 +250,45 @@ const main = async () => {
 					console.log(ActualsCards)
 				})
 			})
+		}
+
+
+		if (program.write){
+			inquirer.prompt(QuestionCard)
+			.then(answers => {
+				VarTri = answers.WhatAllCards
+				defPreciseQuestion(ObjectTransiTabs[answers.WhatAllCards])
+				inquirer.prompt(QuestionCardPrecise)
+				.then(answers => {
+					for (let i = ActualsCards.length - 1; i >= 0; i--) {
+						if (ActualsCards[i][VarTri] == answers.WhatSpeVal) {
+							SortCards.push(ActualsCards[i])
+						}
+					}
+					ActualsCards = SortCards
+					SortCards =[]
+					console.log(ActualsCards)
+					for (var i = ActualsCards.length - 1; i >= 0; i--) {
+						fs.appendFile('Deck.json', String(ActualsCards[i].id)+'\n', (err) => {
+							if (err) throw err
+							})
+					}
+					console.log('Saved!')
+				})
+			})
+		}
+
+
+		if (program.deck) {
+			fs.readFile('Deck.json', 'utf-8', (err, data) => {
+				if (err) throw err
+				console.log(data)
+			})
+		}
+
+
+		if (program.erase) {
+			console.log(await EraseFile())
 		}
 
 
@@ -288,7 +343,7 @@ const main = async () => {
 
 		
 
-		// console.log(ActualsCards)
+		
 
 
 
