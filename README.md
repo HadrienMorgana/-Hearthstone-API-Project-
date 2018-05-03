@@ -1,20 +1,18 @@
 # Hearthstone API project 
 
-# Installation :
+**Installation :**
 
 Une fois les fichiers téléchargés, aller dans votre dossier où ils se trouvent et faire : sudo npm install -g.
 
-# Commandes :
+**Commandes :**
 
   -o ou --obtensible, Ne montre que les cartes obtenables.
 	
   -O ou --nonObtensible, Ne montre que les cartes non-obtenables.
 	
-  -c ou --class [class], Affiche les cartes de la classe, requiert un nom de classe suivant : Neutral, Druid, Rogue, Hunter,  
-	Paladin, Shaman, Warlock, Priest, Warrior, Mage, Deathknight, Dream.
+  -c ou --class [class], Affiche les cartes de la classe, requiert un nom de classe suivant : Neutral, Druid, Rogue, Hunter,  Paladin, Shaman, Warlock, Priest, Warrior, Mage, Deathknight, Dream.
 	
-  -e ou --extension [name], Affiche les cartes selon l extension, requiert un nom d'extension suivante : Core, Tgt, Ungoro,  
-	Gvg, Og, Tb, Loe, Gangs, Brm, Expert1, Missions, Credits, Naxx, Cheat, Kara, Hof, Hero_skins.
+  -e ou --extension [name], Affiche les cartes selon l extension, requiert un nom d'extension suivante : Core, Tgt, Ungoro,  Gvg, Og, Tb, Loe, Gangs, Brm, Expert1, Missions, Credits, Naxx, Cheat, Kara, Hof, Hero_skins.
 	
   -C ou --cost [cost], Affiche les cartes selon le coût, requiert un des nombres suivants : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
 	11, 12, 25, 50.
