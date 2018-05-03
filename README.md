@@ -18,12 +18,14 @@ sudo npm install -g.```
  > HearthstoneCards -C ou --cost [cost], Affiche les cartes selon le coût, requiert un des nombres suivants : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
 	11, 12, 25, 50.
 	
- > HearthstoneCards -r ou --rarity [rarity], Affiche les cartes par rareté, requiert une des raretés suivantes : Free, Common, Rare, Epic, 
-	Legendary.
+ > HearthstoneCards -r ou --rarity [rarity], Affiche les cartes par rareté, requiert une des raretés suivantes : Free, Common, Rare, Epic, Legendary.
 	
  > HearthstoneCards -t ou --type [type], Affiche les cartes par type, requiert un des types suivants : Minion, Spell, Hero, Hero_power, Weapon.
 	
- > HearthstoneCards -i ou --inquirer, Tests d inquirer.
+ > HearthstoneCards -s ou --select, Selection des cartes via un menu.
 	
- >HearthstoneCards  -w ou -write, Créé un fichier avec toutes les cartes sélectionnées.
-
+ > HearthstoneCards  -w ou -write, Ajoute des cartes dans un fichier "Deck.json" et créer le fichier si il n'existe pas.
+ 
+ > HearthstoneCards -d ou --deck, Affiche les cartes du fichier "Deck.json".
+ 
+ > HearthstoneCards -E ou --erase, Détruit le fichier "Deck.json".
