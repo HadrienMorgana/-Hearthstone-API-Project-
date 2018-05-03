@@ -2,7 +2,7 @@
 
 **Installation :**
 
-Une fois les fichiers téléchargés, aller dans votre dossier où ils se trouvent et faire : ```
+Une fois les fichiers téléchargés, aller dans le dossier où ils se trouvent et faire : ```
 sudo npm install```
 
 **Commandes :**
