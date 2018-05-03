@@ -7,9 +7,9 @@ sudo npm install -g.```
 
 **Commandes :**
 
- > HearthstoneCards -o ou --obtensible, Ne montre que les cartes obtenables.
+ > HearthstoneCards -o ou --obtenable, Ne montre que les cartes obtenables.
 	
- > HearthstoneCards -O ou --nonObtensible, Ne montre que les cartes non-obtenables.
+ > HearthstoneCards -O ou --nonObtenable, Ne montre que les cartes non-obtenables.
 	
  > HearthstoneCards -c ou --class [class], Affiche les cartes de la classe, requiert un nom de classe suivant : Neutral, Druid, Rogue, Hunter,  Paladin, Shaman, Warlock, Priest, Warrior, Mage, Deathknight, Dream.
 	
