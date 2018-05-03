@@ -15,8 +15,7 @@ sudo npm install -g.```
 	
  > HearthstoneCards -e ou --extension [name], Affiche les cartes selon l extension, requiert un nom d'extension suivante : Core, Tgt, Ungoro,  Gvg, Og, Tb, Loe, Gangs, Brm, Expert1, Missions, Credits, Naxx, Cheat, Kara, Hof, Hero_skins.
 	
- > HearthstoneCards -C ou --cost [cost], Affiche les cartes selon le coût, requiert un des nombres suivants : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
-	11, 12, 25, 50.
+ > HearthstoneCards -C ou --cost [cost], Affiche les cartes selon le coût, requiert un des nombres suivants : 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 25, 50. Si aucun coût n'est précisé affiche les cartes de coût 1.
 	
  > HearthstoneCards -r ou --rarity [rarity], Affiche les cartes par rareté, requiert une des raretés suivantes : Free, Common, Rare, Epic, Legendary.
 	
