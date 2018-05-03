@@ -3,7 +3,7 @@
 **Installation :**
 
 Une fois les fichiers téléchargés, aller dans votre dossier où ils se trouvent et faire : ```
-sudo npm install -g.```
+sudo npm install```
 
 **Commandes :**
 
